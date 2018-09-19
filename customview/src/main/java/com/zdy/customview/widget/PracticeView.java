@@ -7,7 +7,9 @@ import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
-
+/**
+ * 练习View
+ * */
 public class PracticeView extends View {
     Paint mPaint;
 

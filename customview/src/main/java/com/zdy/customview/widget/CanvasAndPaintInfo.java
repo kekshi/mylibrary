@@ -44,10 +44,129 @@ public class CanvasAndPaintInfo extends View {
 
     private void initPaint() {
         mPaint = new Paint();
+        /**
+         * Style样式
+         *  STROKE 只绘制图形轮廓（描边）
+         *  FILL 只绘制图形内容
+         * FILL_AND_STROKE 既绘制轮廓也绘制内容
+         *  */
+        mPaint.setAntiAlias(true);//抗锯齿
         mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.BLACK);
+        /**线条形状,4 个方法：
+         * setStrokeWidth(float width),设置线条宽度。单位为像素，默认值是 0
+         * setStrokeCap(Paint.Cap cap),设置线头的形状。线头形状有三种：BUTT 平头、ROUND 圆头、SQUARE 方头。默认为 BUTT。
+         * setStrokeJoin(Paint.Join join),设置拐角的形状。有三个值可以选择：MITER 尖角、 BEVEL 平角和 ROUND 圆角。默认为 MITER
+         * setStrokeMiter(float miter),这个方法是对于 setStrokeJoin() 的一个补充，它用于设置 MITER 型拐角的延长线的最大值
+         * */
         mPaint.setStrokeWidth(10);
+//        mPaint.setStrokeCap(Paint.Cap.BUTT);
+//        mPaint.setStrokeJoin(Paint.Join.MITER);
+//        mPaint.setStrokeMiter(4);
+        /**
+         * 色彩优化
+         * setDither(dither) ，设置抖动来优化色彩深度降低时的绘制效果；
+         * setFilterBitmap(filterBitmap) ，设置双线性过滤来优化 Bitmap 放大绘制的效果。
+         * */
+//        mPaint.setDither(true);//设置图像的抖动。只有当你向自建的 Bitmap 中绘制，并且选择 16 位色的 ARGB_4444 或者 RGB_565 的时候，开启它才会有比较明显的效果。
+//        mPaint.setFilterBitmap(true);//设置是否使用双线性过滤来绘制 Bitmap 。图像在放大绘制的时候，默认使用的是最近邻插值过滤，这种算法简单，但会出现马赛克现象；而如果开启了双线性过滤，就可以让结果图像显得更加平滑。
+        mPaint.setColor(Color.BLACK);
+        /**
+         * 使用 PathEffect 来给图形的轮廓设置效果。对 Canvas 所有的图形绘制有效，也就是 drawLine() drawCircle() drawPath() 这些方法。大概像这样：
+         * 下面就具体说一下 Android 中的 6 种 PathEffect。PathEffect 分为两类，
+         * 单一效果的 CornerPathEffect DiscretePathEffect DashPathEffect PathDashPathEffect ，
+         * 组合效果的 SumPathEffect ComposePathEffect。
+         * */
+//        PathEffect pathEffect = new CornerPathEffect(20);//把所有拐角变成圆角（参数为圆角半径）
+//        PathEffect pathEffect = new DiscretePathEffect(20,5);//把线条进行随机的偏离，segmentLength 是用来拼接的每个线段的长度， deviation 是偏离量。
+        /*
+         第一个参数 intervals 是一个数组，它指定了虚线的格式：数组中元素必须为偶数（最少是 2 个），按照「画线长度、空白长度、画线长度、空白长度」……的顺序排列，
+         例如上面代码中的 20, 5, 10, 5 就表示虚线是按照「画 20 像素、空 5 像素、画 10 像素、空 5 像素」的模式来绘制；第二个参数 phase 是虚线的偏移量。
+        */
+//        PathEffect pathEffect = new DashPathEffect(new float[]{20, 10, 5, 10}, 10);//绘制虚线
+        /*
+        * shape 参数是用来绘制的 Path ； advance 是两个相邻的 shape 段之间的间隔，不过注意，这个间隔是两个 shape 段的起点的间隔，而不是前一个的终点和后一个的起点的距离；
+         * phase 和 DashPathEffect 中一样，是虚线的偏移；最后一个参数 style，是用来指定拐弯改变的时候 shape 的转换方式。
+         * style 的类型为 PathDashPathEffect.Style ，是一个 enum ，具体有三个值：
+            TRANSLATE：位移
+            ROTATE：旋转
+            MORPH：变体
+        * */
+//        PathEffect pathEffect = new PathDashPathEffect(mPath, 40, 0, PathDashPathEffect.Style.TRANSLATE);
+
+//        PathEffect dashEffect = new DashPathEffect(new float[]{20, 10}, 0);
+//        PathEffect discreteEffect = new DiscretePathEffect(20, 5);
+        //这是一个组合效果类的 PathEffect 。它的行为特别简单，就是分别按照两种 PathEffect 分别对目标进行绘制。
+//        PathEffect pathEffect = new SumPathEffect(dashEffect, discreteEffect);
+
+//        PathEffect dashEffect = new DashPathEffect(new float[]{20, 10}, 0);
+//        PathEffect discreteEffect = new DiscretePathEffect(20, 5);
+        /*
+        这也是一个组合效果类的 PathEffect 。不过它是先对目标 Path 使用一个 PathEffect，然后再对这个改变后的 Path 使用另一个 PathEffect。
+        * 两个 PathEffect 参数，  innerpe 是先应用的， outerpe 是后应用的。所以上面的代码就是「先偏离，再变虚线
+        * */
+//        PathEffect pathEffect = new ComposePathEffect(dashEffect, discreteEffect);
+//        mPaint.setPathEffect(pathEffect);
+        /**
+         * 注意： PathEffect 在有些情况下不支持硬件加速，需要关闭硬件加速才能正常使用：
+         * Canvas.drawLine() 和 Canvas.drawLines() 方法画直线时，setPathEffect() 是不支持硬件加速的；
+         * PathDashPathEffect 对硬件加速的支持也有问题，所以当使用 PathDashPathEffect 的时候，最好也把硬件加速关了。
+         * */
+
+        /**
+         * 在之后的绘制内容下面加一层阴影。
+         *  radius 是阴影的模糊范围； dx dy 是阴影的偏移量； shadowColor 是阴影的颜色。
+         *  注意：
+         在硬件加速开启的情况下， setShadowLayer() 只支持文字的绘制，文字之外的绘制必须关闭硬件加速才能正常绘制阴影。
+         如果 shadowColor 是半透明的，阴影的透明度就使用 shadowColor 自己的透明度；而如果 shadowColor 是不透明的，阴影的透明度就使用 paint 的透明度。
+         * */
+//        mPaint.setShadowLayer(10, 0, 0, Color.RED);
+//        mPaint.clearShadowLayer();//如果要清除阴影层使用该方法
+        /**
+         * 为之后的绘制设置 MaskFilter。上一个方法 setShadowLayer() 是设置的在绘制层下方的附加效果；而这个  MaskFilter 和它相反，设置的是在绘制层上方的附加效果。
+         * MaskFilter 有两种： BlurMaskFilter 和 EmbossMaskFilter。
+         * */
+        /*
+         * 模糊效果的 MaskFilter。
+         * 它的构造方法 BlurMaskFilter(float radius, BlurMaskFilter.Blur style) 中， radius 参数是模糊的范围，  style 是模糊的类型。一共有四种：
+         *    NORMAL: 内外都模糊绘制
+         *    SOLID: 内部正常绘制，外部模糊
+         *    INNER: 内部模糊，外部不绘制
+         *    OUTER: 内部不绘制，外部模糊（什么鬼？）
+         * */
+//        mPaint.setMaskFilter(new BlurMaskFilter(50, BlurMaskFilter.Blur.NORMAL));
+        /*
+         * 浮雕效果的 MaskFilter。
+         * 它的构造方法 EmbossMaskFilter(float[] direction, float ambient, float specular, float blurRadius) 的参数里，
+         * direction 是一个 3 个元素的数组，指定了光源的方向； ambient 是环境光的强度，数值范围是 0 到 1； specular 是炫光的系数； blurRadius 是应用光线的范围。
+         * */
+//        mPaint.setMaskFilter(new EmbossMaskFilter(new float[]{0,1,1},0.2f,8,10));
+        /**
+         *获取绘制的 Path
+         * 根据 paint 的设置，计算出绘制 Path 或文字时的实际 Path。
+         * 默认情况下（线条宽度为 0、没有 PathEffect），原 Path 和实际 Path 是一样的；而在线条宽度不为 0 （并且模式为 STROKE 模式或 FLL_AND_STROKE ），
+         * 或者设置了 PathEffect 的时候，实际 Path 就和原 Path 不一样了：
+         *
+         * 通过 getFillPath(src, dst) 方法就能获取这个实际 Path。方法的参数里，src 是原 Path ，而 dst 就是实际 Path 的保存位置。 getFillPath(src, dst) 会计算出实际 Path，然后把结果保存在 dst 里。
+         *
+         *  getTextPath(String text, int start, int end, float x, float y, Path path) / getTextPath(char[] text, int index, int count, float x, float y, Path path)
+         这里就回答第二个问题：「文字的 Path」。文字的绘制，虽然是使用 Canvas.drawText() 方法，但其实在下层，文字信息全是被转化成图形，对图形进行绘制的。
+         getTextPath() 方法，获取的就是目标文字所对应的 Path 。这个就是所谓「文字的 Path」。
+         * */
+
+        /**
+         *4 初始化类
+         这一类方法很简单，它们是用来初始化 Paint 对象，或者是批量设置 Paint 的多个属性的方法。
+
+         4.1 reset()
+         重置 Paint 的所有属性为默认值。相当于重新 new 一个，不过性能当然高一些啦。
+
+         4.2 set(Paint src)
+         把 src 的所有属性全部复制过来。相当于调用 src 所有的 get 方法，然后调用这个 Paint 的对应的 set 方法来设置它们。
+
+         4.3 setFlags(int flags)
+         批量设置 flags。相当于依次调用它们的 set 方法。
+         *
+         * */
 
         mPath = new Path();
     }
