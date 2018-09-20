@@ -357,6 +357,11 @@ public class CanvasAndPaintInfo extends View {
          参数  text 是用来绘制的字符串，x 和 y 是绘制的起点坐标
          * */
         mPaint.setTextSize(60);
-        canvas.drawText("afsadfasdfaasdfasdf", 200, 100, mPaint);
+//        Canvas.drawXXX() 方法，都是以左上角作为基准点的，而 drawText() 却是文字左下方,因此Y=0时，将看不到文字内容
+//        canvas.drawText("afsadfasdfaasdfasdf", 200, 100, mPaint);
+//        沿着一条 Path 来绘制文字. 记住一条原则： drawTextOnPath() 使用的 Path ，拐弯处全用圆角，别用尖角。
+//        参数里，需要解释的只有两个： hOffset 和 vOffset。它们是文字相对于 Path 的水平偏移量和竖直偏移量，利用它们可以调整文字的位置。
+//        例如你设置 hOffset 为 5， vOffset 为 10，文字就会右移 5 像素和下移 10 像素。
+        canvas.drawTextOnPath("Hello HeCoder", mPath, 0, 0, mPaint);
     }
 }
