@@ -71,4 +71,10 @@ object AppUtils {
     fun getModel(): String {
         return Build.MODEL
     }
+
+    // 手机厂商
+    fun getDeviceBrand(): String {
+        return Build.BRAND
+    }
+
 }
