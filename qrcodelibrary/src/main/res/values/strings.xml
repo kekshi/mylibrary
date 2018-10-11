@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">qrcodelibrary</string>
+
+    <string name="button_dismiss">忽略</string>
+</resources>
