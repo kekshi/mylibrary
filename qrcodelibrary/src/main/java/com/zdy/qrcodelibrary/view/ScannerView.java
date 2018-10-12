@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.zdy.qrcodelibrary.scan;
+package com.zdy.qrcodelibrary.view;
 
 import android.content.Context;
 import android.content.res.Resources;

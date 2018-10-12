@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.zdy.qrcodelibrary.scan;
+package com.zdy.qrcodelibrary.activity;
 
 import android.Manifest;
 import android.animation.Animator;
@@ -63,14 +63,13 @@ import com.google.zxing.ResultPointCallback;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.zdy.qrcodelibrary.R;
-
+import com.zdy.qrcodelibrary.view.DialogBuilder;
+import com.zdy.qrcodelibrary.view.ScannerView;
+import com.zdy.qrcodelibrary.scan.CameraManager;
 import java.util.EnumMap;
 import java.util.Map;
 
 
-/**
- * @author Andreas Schildbach
- */
 @SuppressWarnings("deprecation")
 public final class ScanActivity extends FragmentActivity
         implements SurfaceTextureListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -87,14 +86,10 @@ public final class ScanActivity extends FragmentActivity
     private TextureView previewView;
 
     private volatile boolean surfaceCreated = false;
-    private Animator sceneTransition = null;
 
-    private Vibrator vibrator;
+    private Vibrator vibrator;//设置震动
     private HandlerThread cameraThread;
     private volatile Handler cameraHandler;
-
-    private ScanViewModel viewModel;
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -111,8 +106,8 @@ public final class ScanActivity extends FragmentActivity
                     WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         setContentView(R.layout.scan_activity);
-        scannerView = (ScannerView) findViewById(R.id.scan_activity_mask);
-        previewView = (TextureView) findViewById(R.id.scan_activity_preview);
+        scannerView = findViewById(R.id.scan_activity_mask);
+        previewView = findViewById(R.id.scan_activity_preview);
         previewView.setSurfaceTextureListener(this);
 
         cameraThread = new HandlerThread("cameraThread", Process.THREAD_PRIORITY_BACKGROUND);
@@ -121,20 +116,6 @@ public final class ScanActivity extends FragmentActivity
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
-    }
-
-    private void maybeTriggerSceneTransition() {
-        if (sceneTransition != null) {
-            sceneTransition.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    getWindow()
-                            .setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.black)));
-                }
-            });
-            sceneTransition.start();
-            sceneTransition = null;
-        }
     }
 
     @Override
@@ -203,6 +184,7 @@ public final class ScanActivity extends FragmentActivity
     @Override
     public void onAttachedToWindow() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            //设置在锁屏页面上显示
             setShowWhenLocked(true);
         }
     }
@@ -226,6 +208,7 @@ public final class ScanActivity extends FragmentActivity
                 cameraHandler.post(new Runnable() {
                     @Override
                     public void run() {
+                        //打开闪光灯
                         cameraManager.setTorch(keyCode == KeyEvent.KEYCODE_VOLUME_UP);
                     }
                 });
@@ -255,6 +238,9 @@ public final class ScanActivity extends FragmentActivity
         }, 50);
     }
 
+    /**
+     * 打开相机的具体逻辑
+     */
     private final Runnable openRunnable = new Runnable() {
         @Override
         public void run() {
@@ -276,13 +262,13 @@ public final class ScanActivity extends FragmentActivity
                 });
 
                 final String focusMode = camera.getParameters().getFocusMode();
+                //自动对焦或聚焦模式
                 final boolean nonContinuousAutoFocus = Camera.Parameters.FOCUS_MODE_AUTO.equals(focusMode)
                         || Camera.Parameters.FOCUS_MODE_MACRO.equals(focusMode);
 
                 if (nonContinuousAutoFocus)
                     cameraHandler.post(new AutoFocusRunnable(camera));
 
-                maybeTriggerSceneTransition();
                 cameraHandler.post(fetchAndDecodeRunnable);
             } catch (final Exception x) {
                 Log.i(TAG, "problem opening camera" + x.getMessage());
@@ -312,6 +298,9 @@ public final class ScanActivity extends FragmentActivity
         }
     };
 
+    /**
+     * 设置对焦模式
+     */
     private final class AutoFocusRunnable implements Runnable {
         private final Camera camera;
 
@@ -336,7 +325,9 @@ public final class ScanActivity extends FragmentActivity
             }
         };
     }
-
+    /**
+     * 解码的逻辑
+     */
     private final Runnable fetchAndDecodeRunnable = new Runnable() {
         private final QRCodeReader reader = new QRCodeReader();
         private final Map<DecodeHintType, Object> hints = new EnumMap<DecodeHintType, Object>(DecodeHintType.class);
@@ -352,10 +343,22 @@ public final class ScanActivity extends FragmentActivity
         }
 
         private void decode(final byte[] data) {
+             // 构造基于平面的YUV亮度源，即包含二维码区域的数据源
             final PlanarYUVLuminanceSource source = cameraManager.buildLuminanceSource(data);
+            // 构造二值图像比特流，使用HybridBinarizer算法解析数据源
             final BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
 
             try {
+                /**
+                * 设置解码格式，设置下面三个模式是和二维码相关的格式
+                *
+                *     mHints.put(DecodeHintType.CHARACTER_SET, "utf-8");
+                  *   mHints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
+                  *   mHints.put(DecodeHintType.POSSIBLE_FORMATS, BarcodeFormat.QR_CODE);
+                * */
+                hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
+                hints.put(DecodeHintType.POSSIBLE_FORMATS, com.google.zxing.BarcodeFormat.QR_CODE);
+                hints.put(DecodeHintType.TRY_HARDER, Boolean.TRUE);
                 hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, new ResultPointCallback() {
                     @Override
                     public void foundPossibleResultPoint(final ResultPoint dot) {
@@ -367,6 +370,7 @@ public final class ScanActivity extends FragmentActivity
                         });
                     }
                 });
+                // 采用QRCodeReader解析图像
                 final Result scanResult = reader.decode(bitmap, hints);
 
                 runOnUiThread(new Runnable() {
@@ -383,7 +387,9 @@ public final class ScanActivity extends FragmentActivity
             }
         }
     };
-
+    /**
+     * dialog的使用
+     */
     public static class WarnDialogFragment extends DialogFragment {
         private static final String FRAGMENT_TAG = WarnDialogFragment.class.getName();
 

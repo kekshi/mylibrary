@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.Toast
-import com.zdy.qrcodelibrary.scan.ScanActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         animator.start()
 
         image.setOnClickListener {
-            startActivityForResult(Intent(this@MainActivity, ScanActivity::class.java), 0)
+            startActivityForResult(Intent(this@MainActivity, com.zdy.qrcodelibrary.activity.ScanActivity::class.java), 0)
         }
     }
 
@@ -38,14 +37,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         Log.e("TAG", "onNewIntent")
-        val input = intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT)
+        val input = intent.getStringExtra(com.zdy.qrcodelibrary.activity.ScanActivity.INTENT_EXTRA_RESULT)
         Toast.makeText(this, input, Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
         if (requestCode == 0) {
             if (resultCode == Activity.RESULT_OK) {
-                val input = intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT)
+                val input = intent.getStringExtra(com.zdy.qrcodelibrary.activity.ScanActivity.INTENT_EXTRA_RESULT)
                 Toast.makeText(this, input, Toast.LENGTH_SHORT).show()
             }
         } else {

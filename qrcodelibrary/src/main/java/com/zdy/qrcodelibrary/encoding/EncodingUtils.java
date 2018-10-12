@@ -1,4 +1,4 @@
-package com.zdy.qrcodelibrary.scan;
+package com.zdy.qrcodelibrary.encoding;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

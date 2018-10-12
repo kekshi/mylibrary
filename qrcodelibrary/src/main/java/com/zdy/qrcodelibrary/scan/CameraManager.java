@@ -253,6 +253,7 @@ public final class CameraManager {
         }
     }
 
+    /**设置取景大小*/
     public PlanarYUVLuminanceSource buildLuminanceSource(final byte[] data) {
         return new PlanarYUVLuminanceSource(data, cameraResolution.width, cameraResolution.height,
                 (int) framePreview.left, (int) framePreview.top, (int) framePreview.width(),
