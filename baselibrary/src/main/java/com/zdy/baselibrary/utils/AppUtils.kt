@@ -16,18 +16,18 @@ object AppUtils {
      */
     fun getLocalVersion(ctx: Context): Int {
         var localVersion = 0
-        try {
-            val packageInfo = ctx.applicationContext
-                    .packageManager
-                    .getPackageInfo(ctx.packageName, 0)
-            localVersion = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-                packageInfo.longVersionCode.toInt()
-            }else{
-                packageInfo.versionCode
-            }
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
+//        try {
+//            val packageInfo = ctx.applicationContext
+//                    .packageManager
+//                    .getPackageInfo(ctx.packageName, 0)
+//            localVersion = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
+//                packageInfo.longVersionCode.toInt()
+//            }else{
+//                packageInfo.versionCode
+//            }
+//        } catch (e: PackageManager.NameNotFoundException) {
+//            e.printStackTrace()
+//        }
 
         return localVersion
     }

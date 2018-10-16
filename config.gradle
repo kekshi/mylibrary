@@ -1,0 +1,24 @@
+ext {
+
+    android = [
+            compileSdkVersion: 28,
+            minSdkVersion    : 21,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    dependencies = [
+            kotlin      : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:'+ KOTLIN_VERSION,
+            supportV7   : 'com.android.support:appcompat-v7:'+ SUPPORT_LIBS_VERSION,
+            supportV4   : 'com.android.support:support-v4:'+ SUPPORT_LIBS_VERSION ,
+            design      : 'com.android.support:design:'+ SUPPORT_LIBS_VERSION,
+            cardview    : 'com.android.support:cardview-v7:'+ SUPPORT_LIBS_VERSION,
+            recyclerview: 'com.android.support:recyclerview-v7:'+ SUPPORT_LIBS_VERSION,
+            gridlayout  : 'com.android.support:gridlayout-v7:'+ SUPPORT_LIBS_VERSION,
+            dnmAnimation: 'com.android.support:support-dynamic-animation:'+ SUPPORT_LIBS_VERSION,
+            constraint  : 'com.android.support.constraint:constraint-layout:1.1.2',
+            multidex    : 'com.android.support:multidex:1.0.3'
+    ]
+
+}
