@@ -15,6 +15,7 @@ public class PropertyAnimation extends View {
     private float progress = 0;
     private Paint paint;
     private ObjectAnimator animator;
+    private int color = Color.RED;
 
     public PropertyAnimation(Context context) {
         super(context);
@@ -31,9 +32,18 @@ public class PropertyAnimation extends View {
     {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.STROKE);
+        paint.setStyle(Paint.Style.FILL);
         paint.setStrokeWidth(20);
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 65);// 执行动画
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+        invalidate();
     }
 
     public float getProgress() {
@@ -48,7 +58,18 @@ public class PropertyAnimation extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawArc(200f, 20, 400f, 220f, 135, progress * 2.7f, false, paint);
+//        canvas.drawArc(200f, 20, 400f, 220f, 135, progress * 2.7f, false, paint);
+        canvas.drawCircle(300, 300, 100, paint);
+    }
+
+    /**
+     * 渐变色动画
+     * 无效果，因为绘制的画笔是红色
+     */
+    public void jbsAnimator() {
+        ObjectAnimator animator = ObjectAnimator.ofArgb(this, "color", 0xffff0000, 0xff00ff00);
+        animator.setDuration(2000);
+        animator.start();
     }
 
     public void start() {

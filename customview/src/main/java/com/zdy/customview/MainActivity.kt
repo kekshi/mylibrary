@@ -1,39 +1,35 @@
 package com.zdy.customview
 
-import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        init()
+//        init()
         initAnimate()
     }
 
     private fun initAnimate() {
-        val animator = ObjectAnimator.ofFloat(image, "translationX", 500f)
-        animator.interpolator = AnticipateOvershootInterpolator()
-        animator.duration = 2000
-        animator.start()
+        //X轴平移500像素
+//        val animator = ObjectAnimator.ofFloat(image, "translationX", 500f)
+//        animator.interpolator = AnticipateOvershootInterpolator()
+//        animator.duration = 2000
+//        animator.start()
 
-        image.setOnClickListener {
-            startActivityForResult(Intent(this@MainActivity, com.zdy.qrcodelibrary.activity.ScanActivity::class.java), 0)
-        }
+//        //Argb渐变色动画
+//        val animator = ObjectAnimator.ofArgb(view, "color", android.R.color.holo_red_dark, android.R.color.holo_green_dark)
+//        animator.duration = 2000
+//        animator.start()
+
     }
 
-    private fun init() {
-        property.progress = 65f
-        property.start()
-    }
 
     override fun onNewIntent(intent: Intent) {
         Log.e("TAG", "onNewIntent")
