@@ -10,6 +10,7 @@ import com.zdy.baselibrary.utils.DensityUtil
 
 /**
  * Created by linapo on 2018/5/28.
+ * 列表侧滑删除控件
  */
 class SlidingDelView : HorizontalScrollView {
 

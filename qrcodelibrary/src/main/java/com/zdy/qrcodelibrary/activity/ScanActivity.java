@@ -18,8 +18,6 @@
 package com.zdy.qrcodelibrary.activity;
 
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -30,7 +28,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
-import android.graphics.drawable.ColorDrawable;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PreviewCallback;
@@ -63,9 +60,10 @@ import com.google.zxing.ResultPointCallback;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
 import com.zdy.qrcodelibrary.R;
+import com.zdy.qrcodelibrary.scan.CameraManager;
 import com.zdy.qrcodelibrary.view.DialogBuilder;
 import com.zdy.qrcodelibrary.view.ScannerView;
-import com.zdy.qrcodelibrary.scan.CameraManager;
+
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -256,6 +254,7 @@ public final class ScanActivity extends FragmentActivity
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //设置取景框位置
                         scannerView.setFraming(framingRect, framingRectInPreview, displayRotation(), cameraRotation,
                                 cameraFlip);
                     }

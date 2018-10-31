@@ -5,5 +5,22 @@
         <attr name="editBoxRightBackground" format="reference" />
         <attr name="editBoxErrorBackground" format="reference" />
     </declare-styleable>
-
+    <declare-styleable name="ScaleView">
+        <attr name="minValue" format="integer" />
+        <attr name="maxValue" format="integer" />
+        <attr name="valSpace" format="integer" />
+        <attr name="initialVal" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="WheelView">
+        <attr name="textGradual" format="boolean" />
+        <attr name="halfVisibleItemCount" format="integer" />
+        <attr name="itemMaximumWidthText" format="string" />
+        <attr name="selectedTextColor" format="color" />
+        <attr name="selectedTextSize" format="dimension" />
+        <attr name="currentItemPosition" format="integer" />
+        <attr name="itemHeightSpace" format="dimension" />
+        <attr name="zoomInSelectedItem" format="boolean" />
+        <attr name="itemTextSize" format="dimension" />
+        <attr name="itemTextColor" format="color" />
+    </declare-styleable>
 </resources>

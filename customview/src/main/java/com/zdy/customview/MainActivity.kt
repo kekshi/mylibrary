@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.zdy.qrcodelibrary.activity.ScanActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        init()
         initAnimate()
+
+        startActivityForResult(Intent(this@MainActivity, ScanActivity::class.java),0)
     }
 
     private fun initAnimate() {

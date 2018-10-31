@@ -1,6 +1,7 @@
 package com.zdy.baselibrary.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.TypedValue;
 
 public class DensityUtils {
@@ -19,6 +20,11 @@ public class DensityUtils {
                 .getDisplayMetrics());
     }
 
+    public static int dp2px(float dpValue) {
+        float scale = Resources.getSystem().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
     /**
      * sp转px
      *
@@ -29,6 +35,11 @@ public class DensityUtils {
 //        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, context.getResources()
 //                .getDisplayMetrics());
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spVal * fontScale + 0.5f);
+    }
+
+    public static int sp2px(float spVal) {
+        float fontScale = Resources.getSystem().getDisplayMetrics().scaledDensity;
         return (int) (spVal * fontScale + 0.5f);
     }
 
@@ -53,6 +64,7 @@ public class DensityUtils {
     public static float px2sp(Context context, float pxVal) {
         return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
+
     /**
      * 得到屏幕宽度
      *

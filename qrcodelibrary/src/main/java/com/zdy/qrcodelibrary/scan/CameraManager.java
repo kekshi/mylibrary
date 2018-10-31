@@ -253,11 +253,17 @@ public final class CameraManager {
         }
     }
 
-    /**设置取景大小*/
+    /**
+     * 设置取景大小
+     */
     public PlanarYUVLuminanceSource buildLuminanceSource(final byte[] data) {
+//        return new PlanarYUVLuminanceSource(data, cameraResolution.width, cameraResolution.height,
+//                (int) framePreview.left, (int) framePreview.top, (int) framePreview.width(),
+//                (int) framePreview.height(), false);
+        /**设置取景框大小为全屏*/
         return new PlanarYUVLuminanceSource(data, cameraResolution.width, cameraResolution.height,
-                (int) framePreview.left, (int) framePreview.top, (int) framePreview.width(),
-                (int) framePreview.height(), false);
+                0, 0, cameraResolution.width,
+                cameraResolution.height, false);
     }
 
     public void setTorch(final boolean enabled) {
