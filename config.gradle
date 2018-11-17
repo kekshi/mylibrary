@@ -1,6 +1,7 @@
 ext {
 
     android = [
+            applicationId    : "com.zdy.mylibrary",
             compileSdkVersion: 28,
             minSdkVersion    : 21,
             targetSdkVersion : 28,
@@ -21,4 +22,14 @@ ext {
             multidex    : 'com.android.support:multidex:1.0.3'
     ]
 
+    keystore = [
+            keystorePath : KEYSTORE_PATH,
+            keystorePassword : KEYSTORE_PASSWORD,
+            keystoreAlias : KEYSTORE_ALIAS,
+            keystoreAliasPassword : KEYSTORE_ALIAS_PASSWORD
+    ]
+
+    buildApk = [
+            appOutputDir         :  APK_OUTPUT_DIR
+    ]
 }

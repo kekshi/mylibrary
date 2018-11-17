@@ -5,6 +5,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
+def buildApk = rootProject.ext.buildApk
+def keystore = rootProject.ext.keystore
 android {
     compileSdkVersion config.compileSdkVersion
     defaultConfig {
@@ -12,19 +14,70 @@ android {
         minSdkVersion config.minSdkVersion
         targetSdkVersion config.targetSdkVersion
         versionCode config.versionCode
-        versionName config.versionName
+        versionName "$config.versionName-build${getTime()}"
+        //解决Error:All flavors must now belong to a named flavor dimension. 意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        flavorDimensions "$config.versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file(keystore.keystorePath)
+            storePassword keystore.keystorePassword
+            keyAlias keystore.keystoreAlias
+            keyPassword keystore.keystoreAliasPassword
+        }
+        debug {
+            storeFile file(keystore.keystorePath)
+            storePassword keystore.keystorePassword
+            keyAlias keystore.keystoreAlias
+            keyPassword keystore.keystoreAliasPassword
+        }
+    }
+    productFlavors {
+        baic {}
+        pay {}
+    }
+    productFlavors.all { flavor ->
+        flavor.manifestPlaceholders = [CHANNEL: name]
+    }
+    applicationVariants.all { variant ->
+        def buildTypeName = variant.buildType.name
+        if (!buildTypeName.equals(buildTypes.debug.name)) {
+            def channel = variant.productFlavors[0].name
+            variant.getPackageApplication().outputDirectory = new File(buildApk.appOutputDir
+                    + "${config.applicationId}/".replace(".", "_") + getDate())
+            variant.outputs.each { output ->
+                output.outputFileName = ("wallet_v$config.versionName-build${getTime()}-${channel}-")
+                        .replace(".", "_") + buildTypeName + ".apk"
+            }
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+static def getDate() {
+    def formattedDate = new Date().format('yyyy_MM_dd')
+    return formattedDate
+}
+
+static def getTime() {
+    def formattedDate = new Date().format('yyyyMMddHHmm')
+    return formattedDate
 }
 
 dependencies {
