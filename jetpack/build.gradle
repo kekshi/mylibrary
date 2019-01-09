@@ -62,4 +62,12 @@ dependencies {
     // optional - ReactiveStreams support for LiveData
     implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
 
+    def paging_version = "1.0.0"
+    api "android.arch.paging:runtime:$paging_version"
+    testImplementation "android.arch.paging:common:$paging_version"
+    api 'android.arch.paging:rxjava2:1.0.0-rc1'
+
+    def flowLayout = "1.1.2"
+    implementation "com.hyman:flowlayout-lib:$flowLayout"
+
 }

@@ -28,4 +28,10 @@ ext {
     retrofitVersion = '2.2.0'
     okhttploggingVersion = '3.4.1'
     okhttpVersion = '3.4.1'
+
+    rxbindingVersion = '2.1.1'
+
+    glideVersion = '4.6.1'
+    gsonVersion = '2.8.2'
+    BaseRecyclerViewAdapterHelperVersion = '2.9.34'
 }
