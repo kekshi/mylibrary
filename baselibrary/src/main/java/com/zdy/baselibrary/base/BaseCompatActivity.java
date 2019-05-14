@@ -24,8 +24,6 @@ import android.view.inputmethod.InputMethodManager;
 import com.zdy.baselibrary.R;
 import com.zdy.baselibrary.global.AppManager;
 import com.zdy.baselibrary.global.GlobalApplication;
-import com.zdy.baselibrary.utils.AppUtils;
-import com.zdy.baselibrary.utils.NetworkConnectionUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -67,6 +65,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         init(savedInstanceState);
         showLoading();
+//        AppUtils.INSTANCE.getLocalVersion(this);
     }
 
     /**
@@ -147,7 +146,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        hasNetWork(NetworkConnectionUtils.INSTANCE.isConnected(this));
+//        hasNetWork(NetworkConnectionUtils.INSTANCE.isConnected(this));
     }
 
     /**
@@ -193,7 +192,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
      * 子类可以复写此方法初始化子类数据
      */
     protected void initData() {
-        mContext = AppUtils.INSTANCE.getContext();
+        mContext = GlobalApplication.getContext();
         mApplication = (GlobalApplication) getApplication();
         isTransAnim = true;
     }
@@ -377,8 +376,8 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             BaseCompatActivity baseCompatActivity = weakReference.get();
-            boolean isConnected = NetworkConnectionUtils.INSTANCE.isConnected(baseCompatActivity);
-            baseCompatActivity.hasNetWork(isConnected);
+//            boolean isConnected = NetworkConnectionUtils.INSTANCE.isConnected(baseCompatActivity);
+//            baseCompatActivity.hasNetWork(isConnected);
 
         }
     }

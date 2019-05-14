@@ -5,21 +5,12 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.telephony.TelephonyManager
-import com.zdy.baselibrary.global.GlobalApplication
 
 /**
  * Created by Icy on 2018/6/7.
  */
 
 object AppUtils {
-
-    /**
-     * 获取上下文对象
-     *
-     * @return 上下文对象
-     */
-    val context: Context
-        get() = GlobalApplication.getContext()
 
     /**
      * 获取本地软件版本号

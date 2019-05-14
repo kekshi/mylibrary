@@ -1,9 +1,8 @@
 package com.zdy.baselibrary.retrofit;
 
-import com.zdy.baselibrary.retrofit.okhttp.cache.HttpCache;
+import com.zdy.baselibrary.global.GlobalApplication;
 import com.zdy.baselibrary.retrofit.okhttp.TrustManager;
 import com.zdy.baselibrary.retrofit.okhttp.cookies.CookieManger;
-import com.zdy.baselibrary.utils.AppUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,9 +27,9 @@ public class RetrofitCreateHelper {
             //设置Cache拦截器
 //            .addNetworkInterceptor(cacheInterceptor)
 //            .addInterceptor(cacheInterceptor)
-            .cache(HttpCache.getCache())
+//            .cache(HttpCache.getCache())
             // 设置 Cookie
-            .cookieJar(new CookieManger(AppUtils.INSTANCE.getContext()))
+            .cookieJar(new CookieManger(GlobalApplication.getContext()))
             //time out
             .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)

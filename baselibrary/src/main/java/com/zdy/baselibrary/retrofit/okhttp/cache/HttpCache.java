@@ -1,7 +1,7 @@
 package com.zdy.baselibrary.retrofit.okhttp.cache;
 
 
-import com.zdy.baselibrary.utils.AppUtils;
+import com.zdy.baselibrary.global.GlobalApplication;
 
 import java.io.File;
 
@@ -16,7 +16,7 @@ public class HttpCache {
     private static final int HTTP_RESPONSE_DISK_CACHE_MAX_SIZE = 50 * 1024 * 1024;
 
     public static Cache getCache() {
-        return new Cache(new File(AppUtils.INSTANCE.getContext().getExternalCacheDir().getAbsolutePath() + File
+        return new Cache(new File(GlobalApplication.getContext().getExternalCacheDir().getAbsolutePath() + File
                 .separator + "data/NetCache"),
                 HTTP_RESPONSE_DISK_CACHE_MAX_SIZE);
     }
