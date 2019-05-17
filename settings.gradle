@@ -1,1 +1,1 @@
-include ':app', ':customview', ':ndkmodule', ':baselibrary', ':qrcodelibrary', ':jetpack'
+include ':app', ':customview', ':ndkmodule', ':baselibrary', ':qrcodelibrary', ':jetpack', ':plugin'

@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/customview" />
             <option value="$PROJECT_DIR$/jetpack" />
             <option value="$PROJECT_DIR$/ndkmodule" />
+            <option value="$PROJECT_DIR$/plugin" />
             <option value="$PROJECT_DIR$/qrcodelibrary" />
           </set>
         </option>
