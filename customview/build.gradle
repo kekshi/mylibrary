@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'cn.sensorsdata.android'
 
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
@@ -28,6 +29,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+}
+
+sensorsData {
+    debug = true
 }
 
 dependencies {
