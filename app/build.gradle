@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+
+
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
 def buildApk = rootProject.ext.buildApk
@@ -81,6 +81,7 @@ static def getTime() {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':baselibrary')
     implementation 'org.aspectj:aspectjrt:1.9.2'
 }

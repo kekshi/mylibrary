@@ -1,35 +1,36 @@
 ext {
 
     android = [
-            applicationId    : "com.zdy.mylibrary",
-            compileSdkVersion: 28,
-            minSdkVersion    : 21,
-            targetSdkVersion : 28,
-            versionCode      : 1,
-            versionName      : "1.0.0"
+            compileSdkVersion     : 28,
+            minSdkVersion         : 21,
+            targetSdkVersion      : 28,
+            buildToolsVersion     : '28.0.3',
+            versionCode           : 1,
+            versionName           : "1.0.0",
     ]
 
+    def SUPPORT_LIBS_VERSION = '28.0.0'
     dependencies = [
-            kotlin      : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:'+ KOTLIN_VERSION,
-            supportV7   : 'com.android.support:appcompat-v7:'+ SUPPORT_LIBS_VERSION,
-            supportV4   : 'com.android.support:support-v4:'+ SUPPORT_LIBS_VERSION ,
-            design      : 'com.android.support:design:'+ SUPPORT_LIBS_VERSION,
-            cardview    : 'com.android.support:cardview-v7:'+ SUPPORT_LIBS_VERSION,
-            recyclerview: 'com.android.support:recyclerview-v7:'+ SUPPORT_LIBS_VERSION,
-            gridlayout  : 'com.android.support:gridlayout-v7:'+ SUPPORT_LIBS_VERSION,
-            dnmAnimation: 'com.android.support:support-dynamic-animation:'+ SUPPORT_LIBS_VERSION,
-            constraint  : 'com.android.support.constraint:constraint-layout:1.1.2',
+            kotlin      : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:' + KOTLIN_VERSION,
+            supportV7   : 'com.android.support:appcompat-v7:' + SUPPORT_LIBS_VERSION,
+            supportV4   : 'com.android.support:support-v4:' + SUPPORT_LIBS_VERSION,
+            design      : 'com.android.support:design:' + SUPPORT_LIBS_VERSION,
+            cardview    : 'com.android.support:cardview-v7:' + SUPPORT_LIBS_VERSION,
+            recyclerview: 'com.android.support:recyclerview-v7:' + SUPPORT_LIBS_VERSION,
+            gridlayout  : 'com.android.support:gridlayout-v7:' + SUPPORT_LIBS_VERSION,
+            dnmAnimation: 'com.android.support:support-dynamic-animation:' + SUPPORT_LIBS_VERSION,
+            constraint  : 'com.android.support.constraint:constraint-layout:1.1.3',
             multidex    : 'com.android.support:multidex:1.0.3'
     ]
 
     keystore = [
-            keystorePath : KEYSTORE_PATH,
-            keystorePassword : KEYSTORE_PASSWORD,
-            keystoreAlias : KEYSTORE_ALIAS,
-            keystoreAliasPassword : KEYSTORE_ALIAS_PASSWORD
+            keystorePath         : KEYSTORE_PATH,
+            keystorePassword     : KEYSTORE_PASSWORD,
+            keystoreAlias        : KEYSTORE_ALIAS,
+            keystoreAliasPassword: KEYSTORE_ALIAS_PASSWORD
     ]
 
     buildApk = [
-            appOutputDir         :  APK_OUTPUT_DIR
+            appOutputDir: APK_OUTPUT_DIR
     ]
 }

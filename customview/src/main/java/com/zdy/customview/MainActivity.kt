@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 //                Log.e("TAG", "JS返回结果：$it")
 //            }
         }
+
     }
 
     private fun JsAndAndroid() {
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, input, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 0) {
             if (resultCode == Activity.RESULT_OK) {
                 val input = intent.getStringExtra(com.zdy.qrcodelibrary.activity.ScanActivity.INTENT_EXTRA_RESULT)

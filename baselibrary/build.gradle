@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 def config = rootProject.ext.android
 def librarys = rootProject.ext.dependencies
+
 android {
+//    buildToolsVersion config.buildToolsVersion
     compileSdkVersion config.compileSdkVersion
-
-
-
     defaultConfig {
         minSdkVersion config.minSdkVersion
         targetSdkVersion config.targetSdkVersion
@@ -28,15 +30,15 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     api librarys.constraint
     api librarys.supportV7
     api librarys.kotlin
     api project(':qrcodelibrary')
 
-    api 'junit:junit:4.12'
-    api 'com.android.support.test:runner:1.0.2'
-    api 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation "junit:junit:$junitVersion"
+    androidTestImplementation "androidx.test:runner:$androidTestVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$androidEspressoVersion"
 
     // Retrofit
     api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"

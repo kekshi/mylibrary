@@ -23,7 +23,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.zdy.baselibrary.R;
 import com.zdy.baselibrary.global.AppManager;
-import com.zdy.baselibrary.global.GlobalApplication;
 
 import java.lang.ref.WeakReference;
 
@@ -32,7 +31,7 @@ import java.lang.ref.WeakReference;
  * @author Alex
  */
 public abstract class BaseCompatActivity extends AppCompatActivity {
-    protected GlobalApplication mApplication;
+    protected BaseApplication mApplication;
     protected Context mContext;
     protected boolean isTransAnim;
     public boolean mCheckNetWork = true;
@@ -192,8 +191,8 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
      * 子类可以复写此方法初始化子类数据
      */
     protected void initData() {
-        mContext = GlobalApplication.getContext();
-        mApplication = (GlobalApplication) getApplication();
+        mContext = BaseApplication.context;
+        mApplication = (BaseApplication) getApplication();
         isTransAnim = true;
     }
 

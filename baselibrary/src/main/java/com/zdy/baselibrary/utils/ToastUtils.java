@@ -5,10 +5,12 @@ import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import com.zdy.baselibrary.base.BaseApplication;
+
 
 /**
  * toast显示类，可以在子线程直接调用
- * 
+ *
  */
 public class ToastUtils
 {
@@ -38,14 +40,14 @@ public class ToastUtils
 			});
 		}
 	}
-	
+
 	private static void show(String text, int duration)
 	{
 		if (toast != null)
 		{
 			toast.cancel();
 		}
-//		toast = Toast.makeText(App.getApp(), text, duration);
+		toast = Toast.makeText(BaseApplication.context, text, duration);
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
 	}
