@@ -1,13 +1,13 @@
-package com.example.administrator.wanandroid.bean
+package com.example.jetpack.bean
 
 /**
  * @author : Alex
  * @version : V 2.0.0
  * @date : 2018/10/18
  */
-data class LoginBean( var data: DataBean? = null,
-                      var errorCode: Int = 0,
-                      var errorMsg: String? = null
+data class LoginBean(var data: DataBean? = null,
+                     var errorCode: Int = 0,
+                     var errorMsg: String? = null
                       ) {
 
     /**

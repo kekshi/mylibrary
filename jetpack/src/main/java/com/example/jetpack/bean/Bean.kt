@@ -1,4 +1,4 @@
-package com.example.administrator.wanandroid.bean
+package com.example.jetpack.bean
 
 /**
  * @author : Alex

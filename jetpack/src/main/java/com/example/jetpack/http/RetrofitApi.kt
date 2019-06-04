@@ -1,13 +1,8 @@
-package com.example.administrator.wanandroid.http
+package com.example.jetpack.http
 
 import com.zdy.baselibrary.retrofit.RetrofitCreateHelper
 
 
-/**
- * @author : Alex
- * @version : V 2.0.0
- * @date : 2018/10/18
- */
 object RetrofitApi {
 
     private  var api: Api? = null

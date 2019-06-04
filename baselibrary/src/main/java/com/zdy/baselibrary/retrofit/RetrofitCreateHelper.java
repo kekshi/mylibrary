@@ -4,6 +4,8 @@ import com.zdy.baselibrary.base.BaseApplication;
 import com.zdy.baselibrary.retrofit.okhttp.TrustManager;
 import com.zdy.baselibrary.retrofit.okhttp.cookies.CookieManger;
 
+import org.apache.http.conn.ssl.SSLSocketFactory;
+
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -21,7 +23,7 @@ public class RetrofitCreateHelper {
     private static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             //SSL证书
             .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
-            .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+            .hostnameVerifier(SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
             //打印日志
             .addInterceptor(interceptor)
             //设置Cache拦截器

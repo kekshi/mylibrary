@@ -20,6 +20,9 @@
         <activity android:name=".TextActivity">
 
         </activity>
+        <activity android:name=".webview.WebViewActivity">
+
+        </activity>
     </application>
 
 </manifest>

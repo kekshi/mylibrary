@@ -1,7 +1,9 @@
-package com.example.administrator.wanandroid.http
+package com.example.jetpack.http
 
 
-import com.example.administrator.wanandroid.bean.*
+import com.example.administrator.wanandroid.bean.CategoryResponse
+import com.example.administrator.wanandroid.bean.HotTagBean
+import com.example.jetpack.bean.*
 import io.reactivex.Observable
 import retrofit2.http.*
 

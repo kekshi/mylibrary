@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.animation.AnimationUtils
+import android.view.animation.RotateAnimation
 import android.webkit.JavascriptInterface
 import android.webkit.JsResult
 import android.webkit.WebChromeClient
@@ -16,13 +18,16 @@ import com.zdy.baselibrary.utils.PermissionUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 
+
+
+
+
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        init()
-        initAnimate()
 //        AndroidAndJs()
         JsAndAndroid()
 //        startActivityForResult(Intent(this@MainActivity, ScanActivity::class.java),0)
@@ -37,7 +42,26 @@ class MainActivity : AppCompatActivity() {
 //            mWebView.evaluateJavascript("javascript:callJS()") {
 //                Log.e("TAG", "JS返回结果：$it")
 //            }
+            initAnimate()
         }
+    }
+
+    private fun initAnimate() {
+        val animation = AnimationUtils.loadAnimation(this, R.anim.test_anim)
+        mBtnJs.startAnimation(animation)
+        val rotate = RotateAnimation(0f, 360f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                RotateAnimation.RELATIVE_TO_SELF, 0.5f)
+        //X轴平移500像素
+//        val animator = ObjectAnimator.ofFloat(image, "translationX", 500f)
+//        animator.interpolator = AnticipateOvershootInterpolator()
+//        animator.duration = 2000
+//        animator.start()
+
+//        //Argb渐变色动画
+//        val animator = ObjectAnimator.ofArgb(view, "color", android.R.color.holo_red_dark, android.R.color.holo_green_dark)
+//        animator.duration = 2000
+//        animator.start()
 
     }
 
@@ -82,21 +106,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    private fun initAnimate() {
-        //X轴平移500像素
-//        val animator = ObjectAnimator.ofFloat(image, "translationX", 500f)
-//        animator.interpolator = AnticipateOvershootInterpolator()
-//        animator.duration = 2000
-//        animator.start()
-
-//        //Argb渐变色动画
-//        val animator = ObjectAnimator.ofArgb(view, "color", android.R.color.holo_red_dark, android.R.color.holo_green_dark)
-//        animator.duration = 2000
-//        animator.start()
-
-    }
-
 
     override fun onNewIntent(intent: Intent) {
         Log.e("TAG", "onNewIntent")
