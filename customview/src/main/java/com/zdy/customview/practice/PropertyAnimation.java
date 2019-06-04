@@ -1,4 +1,4 @@
-package com.zdy.customview.widget;
+package com.zdy.customview.practice;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;

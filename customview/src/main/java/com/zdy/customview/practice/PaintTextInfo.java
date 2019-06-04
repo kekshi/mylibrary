@@ -1,4 +1,4 @@
-package com.zdy.customview.widget;
+package com.zdy.customview.practice;
 
 import android.content.Context;
 import android.graphics.Canvas;

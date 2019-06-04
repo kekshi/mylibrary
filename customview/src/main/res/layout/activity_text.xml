@@ -7,16 +7,15 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.zdy.customview.widget.PropertyAnimation
-        android:id="@+id/property"
+    <com.zdy.customview.widget.CustomVolumControlBar
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        app:firstColor="@android:color/holo_blue_light"
+        app:secondColor="@android:color/holo_green_light"
+        app:circleWidth="40dp"
+        app:dotCount="10"
+        app:splitSize="20"
+        app:bg="@drawable/ic_sign_finish"/>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@drawable/shape_circle" />
 
 </LinearLayout>

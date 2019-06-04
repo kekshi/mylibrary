@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RingView">
+        <attr name="firstColor" format="reference|color" />
+        <attr name="secondColor" format="reference|color" />
+        <attr name="circleWidth" format="dimension" />
+        <attr name="speed" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomVolumControlBar">
+        <attr name="barFirstColor" format="reference|color" />
+        <attr name="barSecondColor" format="reference|color" />
+        <attr name="barCircleWidth" format="dimension" />
+        <attr name="dotCount" format="integer" />
+        <attr name="splitSize" format="integer" />
+        <attr name="bg" format="reference" />
+    </declare-styleable>
+</resources>
