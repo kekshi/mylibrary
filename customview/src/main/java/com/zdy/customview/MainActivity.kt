@@ -4,8 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.RotateAnimation
@@ -13,13 +11,12 @@ import android.webkit.JavascriptInterface
 import android.webkit.JsResult
 import android.webkit.WebChromeClient
 import android.webkit.WebView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.zdy.baselibrary.utils.PermissionUtil
+import com.zdy.baselibrary.utils.ToastUtils
+import com.zdy.qrcodelibrary.activity.ScanActivity
 import kotlinx.android.synthetic.main.activity_main.*
-
-
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -109,15 +106,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onNewIntent(intent: Intent) {
         Log.e("TAG", "onNewIntent")
-        val input = intent.getStringExtra(com.zdy.qrcodelibrary.activity.ScanActivity.INTENT_EXTRA_RESULT)
-        Toast.makeText(this, input, Toast.LENGTH_SHORT).show()
+        val input = intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT)
+        ToastUtils.showToast(input)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 0) {
             if (resultCode == Activity.RESULT_OK) {
-                val input = intent.getStringExtra(com.zdy.qrcodelibrary.activity.ScanActivity.INTENT_EXTRA_RESULT)
-                Toast.makeText(this, input, Toast.LENGTH_SHORT).show()
+                val input = intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT)
+                ToastUtils.showToast(input)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, intent)

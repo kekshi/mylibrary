@@ -1,4 +1,4 @@
-package com.imio.libutils.fingerprint
+package com.zdy.baselibrary.utils.fingerprint
 
 /*
  * Copyright 2017 Idealnaya rabota LLC
@@ -10,7 +10,7 @@ import android.annotation.TargetApi
 import android.app.KeyguardManager
 import android.content.Context
 import android.os.Build
-import android.support.v4.hardware.fingerprint.FingerprintManagerCompat
+import androidx.core.hardware.fingerprint.FingerprintManagerCompat
 
 object FingerprintUtils {
 
@@ -31,15 +31,15 @@ object FingerprintUtils {
 
             val keyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
             if (!keyguardManager.isKeyguardSecure) {
-                return mSensorState.NOT_BLOCKED
+                return FingerprintUtils.mSensorState.NOT_BLOCKED
             }
 
             return if (!FingerprintManagerCompat.from(context).hasEnrolledFingerprints()) {
-                mSensorState.NO_FINGERPRINTS
-            } else mSensorState.READY
+                FingerprintUtils.mSensorState.NO_FINGERPRINTS
+            } else FingerprintUtils.mSensorState.READY
 
         } else {
-            return mSensorState.NOT_SUPPORTED
+            return FingerprintUtils.mSensorState.NOT_SUPPORTED
         }
 
     }

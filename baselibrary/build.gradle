@@ -32,8 +32,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api librarys.constraint
-    api librarys.supportV7
-    api librarys.design
     api librarys.kotlin
     api project(':qrcodelibrary')
 
@@ -57,4 +55,12 @@ dependencies {
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.BaseRecyclerViewAdapterHelperVersion"
 
     api 'com.orhanobut:logger:2.2.0'
+
+    api "androidx.fragment:fragment:$fragmentVersion"
+    //kotlin 协程
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+
+    api 'androidx.core:core-ktx:1.0.2'//对应  com.android.support:support-compat
+    api 'com.google.android.material:material:1.1.0-alpha06'//对应 com.android.support:design
 }

@@ -21,10 +21,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class PermissionUtil {
 
@@ -41,7 +42,7 @@ public class PermissionUtil {
         ActivityCompat
                 .requestPermissions(
                         activity,
-                        new String[] {permission},
+                        new String[]{permission},
                         requestCode
                 );
     }
@@ -58,7 +59,7 @@ public class PermissionUtil {
                         uri,
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                                 | Intent.FLAG_GRANT_READ_URI_PERMISSION
-        );
+                );
     }
 
     public static void hasPermission(@NonNull final AppCompatActivity activity,

@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 def config = rootProject.ext.android
 android {
     compileSdkVersion config.compileSdkVersion
@@ -28,6 +30,9 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -35,38 +40,33 @@ dependencies {
     implementation project(':baselibrary')
 
     //Room
-    def room_version = "1.1.1"
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    kapt "android.arch.persistence.room:compiler:$room_version"
-    implementation "android.arch.persistence.room:rxjava2:$room_version"
-    implementation "android.arch.persistence.room:guava:$room_version"
-    testImplementation "android.arch.persistence.room:testing:$room_version"
+    def room_version = "2.1.0-rc01"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version" // For Kotlin use kapt instead of annotationProcessor
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
+    // optional - RxJava support for Room
+    implementation "androidx.room:room-rxjava2:$room_version"
 
     // Navigation
-    def nav_version = "1.0.0-alpha06"
-    implementation "android.arch.navigation:navigation-fragment:$nav_version"
-    implementation "android.arch.navigation:navigation-ui:$nav_version"
-    androidTestImplementation "android.arch.navigation:navigation-testing:$nav_version"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.60"
+    def nav_version = "2.1.0-alpha04"
+    implementation "androidx.navigation:navigation-fragment:$nav_version" // For Kotlin use navigation-fragment-ktx
+    implementation "androidx.navigation:navigation-ui:$nav_version" // For Kotlin use navigation-ui-ktx
 
-    def lifecycle_version = "1.1.1"
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    def lifecycle_version = "2.0.0"
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     // alternatively - just ViewModel
-    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version"
-    // use -ktx for Kotlin
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version" // For Kotlin use lifecycle-viewmodel-ktx
     // alternatively - just LiveData
-    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
-    // alternatively - Lifecycles only (no ViewModel or LiveData).
-    //     Support library depends on this lightweight import
-    implementation "android.arch.lifecycle:runtime:$lifecycle_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
-    // optional - ReactiveStreams support for LiveData
-    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
 
-    def paging_version = "1.0.0"
-    api "android.arch.paging:runtime:$paging_version"
-    testImplementation "android.arch.paging:common:$paging_version"
-    api 'android.arch.paging:rxjava2:1.0.0-rc1'
+    def paging_version = "2.1.0"
+    implementation "androidx.paging:paging-runtime:$paging_version" // For Kotlin use paging-runtime-ktx
+    // optional - RxJava support
+    implementation "androidx.paging:paging-rxjava2:$paging_version" // For Kotlin use paging-rxjava2-ktx
+    // alternatively - without Android dependencies for testing
+    testImplementation "androidx.paging:paging-common:$paging_version" // For Kotlin use paging-common-ktx
 
     def flowLayout = "1.1.2"
     implementation "com.hyman:flowlayout-lib:$flowLayout"

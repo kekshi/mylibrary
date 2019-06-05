@@ -1,7 +1,7 @@
 package com.zdy.zdyview
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.zdy.qrcodelibrary.utils.BrightnessUtils
 import kotlinx.android.synthetic.main.activity_main.*
 

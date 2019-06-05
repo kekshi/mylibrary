@@ -1,8 +1,7 @@
-package com.imio.libutils.cache
+package com.zdy.baselibrary.utils.cache
 
 import android.content.Context
 import android.text.TextUtils
-import com.zdy.baselibrary.utils.cache.Weak
 import java.io.*
 
 object CacheUtils{

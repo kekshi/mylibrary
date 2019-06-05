@@ -19,6 +19,8 @@ package com.zdy.qrcodelibrary.activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -37,11 +39,6 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Process;
 import android.os.Vibrator;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Surface;
@@ -49,6 +46,10 @@ import android.view.TextureView;
 import android.view.TextureView.SurfaceTextureListener;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -68,7 +69,6 @@ import java.util.EnumMap;
 import java.util.Map;
 
 
-@SuppressWarnings("deprecation")
 public final class ScanActivity extends FragmentActivity
         implements SurfaceTextureListener, ActivityCompat.OnRequestPermissionsResultCallback {
     private static final String TAG = "ScanActivity";

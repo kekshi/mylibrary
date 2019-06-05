@@ -10,9 +10,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- * Created by Icy on 2018/5/15.
- */
 
 public final class HmacBasedOneTimePassword {
     public enum Algorithm {

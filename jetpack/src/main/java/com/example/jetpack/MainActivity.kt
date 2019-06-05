@@ -1,7 +1,7 @@
 package com.example.jetpack
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  *   created by co753 on 2018/11/25

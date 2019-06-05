@@ -1,4 +1,4 @@
-package com.imio.libbase.extensions
+package com.zdy.baselibrary.expand
 
 import android.text.SpannableString
 import android.text.Spanned

@@ -5,18 +5,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.support.annotation.StyleRes;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.TintTypedArray;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.TintTypedArray;
+import androidx.appcompat.widget.Toolbar;
 
 import com.zdy.baselibrary.R;
 
@@ -172,6 +173,7 @@ public class ToolbarView extends Toolbar {
         super.setNavigationIcon(icon);
         setGravityCenter();
         Context context = getContext();
+        //TODO 这里不一定能强转
         if (context instanceof Activity) {
             setNavigationOnClickListener(v -> ((Activity) getContext()).finish());
         } else if (context instanceof ContextWrapper) {

@@ -4,9 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-/**
- * Created by Icy on 2018/5/15.
- */
 
 public final class TimeBasedOneTimePassword {
     private final long slotMillis;

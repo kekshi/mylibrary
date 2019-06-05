@@ -1,16 +1,16 @@
-package com.imio.financialmng.view
+package com.zdy.baselibrary.widget
 
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
 import android.view.ViewConfiguration
 import android.widget.Scroller
+import androidx.core.content.ContextCompat
 import com.zdy.baselibrary.R
 import com.zdy.baselibrary.utils.DensityUtils
 
